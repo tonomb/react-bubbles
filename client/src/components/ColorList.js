@@ -56,6 +56,7 @@ const ColorList = ({ colors, updateColors, setUpdatedColor }) => {
     e.preventDefault()
     if(colorToAdd.color === '' || colorToAdd.code.hex ===''){
       setAdding(false)
+      setColorToAdd(initialColor);
     } else{
       axiosWithAuth()
       .post('/api/colors', colorToAdd)
