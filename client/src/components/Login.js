@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {useHistory} from 'react-router-dom'
 import axios from 'axios'
 
 const initialState={
@@ -11,6 +12,7 @@ const Login = () => {
   // make a post request to retrieve a token from the api
   // when you have handled the token, navigate to the BubblePage route
   const [formValues, setFormValues] = useState(initialState)
+  const history= useHistory();
 
   const handleChange = (e) =>{
     setFormValues({
@@ -25,7 +27,8 @@ const Login = () => {
       .then(res=>{
         //token is at res.data.payload
         console.log(res);
-        window.localStorage.setItem('token', res.data.payload)
+        window.localStorage.setItem('token', JSON.stringify(res.data.payload));
+        history.push('/')
       })
       .catch(err =>{
         console.log(err);
